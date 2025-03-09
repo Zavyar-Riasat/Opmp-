@@ -8,7 +8,7 @@
 void sequential_matrix_vector_addition(float **matrix, const float *vector, float **result) {
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {
-            result[j][i] = matrix[j][i] + vector[j];
+            result[i][j] = matrix[i][j] + vector[j];
         }
     }
 }

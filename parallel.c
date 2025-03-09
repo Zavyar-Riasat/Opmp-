@@ -17,7 +17,7 @@ void parallel_matrix_vector_addition(float **matrix, const float *vector, float 
             printf("Using %d threads\n", num_threads);
         }
 
-        #pragma omp for schedule(dynamic, 100)
+        #pragma omp for schedule(static, 100)
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 result[i][j] = matrix[i][j] + vector[j];
@@ -43,14 +43,14 @@ int main() {
 
     srand(time(NULL));
 
-    #pragma omp parallel for schedule(dynamic, 100)
+    #pragma omp parallel for schedule(static, 100)
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {
             matrix[i][j] = (float)(rand() % 100);
         }
     }
 
-    #pragma omp parallel for schedule(dynamic, 100)
+    #pragma omp parallel for schedule(static, 100)
     for (int j = 0; j < COLS; j++) {
         vector[j] = (float)(rand() % 100);
     }
