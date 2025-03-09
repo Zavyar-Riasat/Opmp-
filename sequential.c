@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define ROWS 100
-#define COLS 100
+#define ROWS 10000
+#define COLS 10000
 
 void sequential_matrix_vector_addition(float matrix[ROWS][COLS], const float vector[COLS], float result[ROWS][COLS]) {
     for (int i = 0; i < ROWS; i++) {
