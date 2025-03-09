@@ -3,9 +3,9 @@
 #include <time.h>
 
 #define ROWS 10000
-#define COLS 10000
+#define COLS 1000
 
-void sequential_matrix_vector_addition(float matrix[ROWS][COLS], const float vector[COLS], float result[ROWS][COLS]) {
+void sequential_matrix_vector_addition(float **matrix, const float *vector, float **result) {
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {
             result[i][j] = matrix[i][j] + vector[j];
@@ -14,9 +14,19 @@ void sequential_matrix_vector_addition(float matrix[ROWS][COLS], const float vec
 }
 
 int main() {
-    float matrix[ROWS][COLS];
-    float result[ROWS][COLS];
-    float vector[COLS];
+    float **matrix = (float **)malloc(ROWS * sizeof(float *));
+    float **result = (float **)malloc(ROWS * sizeof(float *));
+    float *vector = (float *)malloc(COLS * sizeof(float));
+
+    if (matrix == NULL || vector == NULL || result == NULL) {
+        printf("Memory allocation failed!\n");
+        return 1;
+    }
+
+    for (int i = 0; i < ROWS; i++) {
+        matrix[i] = (float *)malloc(COLS * sizeof(float));
+        result[i] = (float *)malloc(COLS * sizeof(float));
+    }
 
     srand(time(NULL));
 
@@ -35,6 +45,14 @@ int main() {
     double end_seq = clock();
 
     printf("Sequential Execution Time: %f seconds\n", (end_seq - start_seq) / CLOCKS_PER_SEC);
+
+    for (int i = 0; i < ROWS; i++) {
+        free(matrix[i]);
+        free(result[i]);
+    }
+    free(matrix);
+    free(result);
+    free(vector);
 
     return 0;
 }
