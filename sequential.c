@@ -3,12 +3,12 @@
 #include <time.h>
 
 #define ROWS 10000
-#define COLS 1000
+#define COLS 10000
 
 void sequential_matrix_vector_addition(float **matrix, const float *vector, float **result) {
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {
-            result[i][j] = matrix[i][j] + vector[j];
+            result[j][i] = matrix[j][i] + vector[j];
         }
     }
 }
