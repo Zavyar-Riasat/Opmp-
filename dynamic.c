@@ -3,6 +3,8 @@
 #include <time.h>
 #include <omp.h>
 
+
+
 #define ROWS 10000
 #define COLS 1000
 
